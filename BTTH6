@@ -1,0 +1,98 @@
+BÀI LÀM: THIẾT KẾ MoMo-Lite THEO MÔ HÌNH DIKW
+1. Mô hình DIKW của MoMo-Lite
+Tầng
+Nội dung
+Ví dụ trong MoMo-Lite
+Data
+Dữ liệu thô được thu thập từ các giao dịch
+Số tiền 200.000đ, thời gian giao dịch, loại chi tiêu, cửa hàng
+Information
+Dữ liệu được xử lý và tổng hợp thành thông tin có ý nghĩa
+Tháng này đã chi 5.000.000đ, trong đó ăn uống 2.000.000đ, mua sắm 1.500.000đ
+Knowledge
+Phân tích thông tin để phát hiện xu hướng hoặc đưa ra cảnh báo
+Hệ thống nhận thấy người dùng đang chi tiêu cho ăn uống cao hơn mức bình thường
+Wisdom
+Sử dụng kiến thức để đưa ra quyết định hoặc đề xuất phù hợp
+Gợi ý giảm chi tiêu ăn uống và lập kế hoạch tiết kiệm 1.000.000đ/tháng
+
+Có thể hiểu theo chuỗi:
+DATA
+↓
+Lịch sử giao dịch, số tiền, thời gian, loại chi tiêu
+↓
+INFORMATION
+↓
+Báo cáo tổng hợp chi tiêu theo ngày/tháng
+↓
+KNOWLEDGE
+↓
+Phát hiện chi tiêu vượt mức và đưa ra cảnh báo
+↓
+WISDOM
+↓
+Gợi ý kế hoạch tiết kiệm phù hợp
+
+2. Các module Input / Process / Output
+Module
+Input
+Process
+Output
+Giao dịch
+Số tiền, người nhận, thời gian, nội dung
+Kiểm tra và lưu giao dịch
+Lịch sử giao dịch
+Thống kê chi tiêu
+Lịch sử giao dịch
+Phân loại và tính tổng
+Báo cáo chi tiêu ngày/tháng
+Cảnh báo
+Mức chi tiêu, ngân sách
+So sánh chi tiêu với ngân sách
+Cảnh báo vượt mức
+Tiết kiệm
+Thu nhập, chi tiêu, mục tiêu tiết kiệm
+Phân tích thói quen chi tiêu
+Gợi ý kế hoạch tiết kiệm
+
+Ví dụ một giao dịch
+INPUT
+Người dùng thanh toán 200.000đ tiền ăn
+        ↓
+PROCESS
+Hệ thống lưu giao dịch
+→ phân loại "Ăn uống"
+→ cập nhật tổng chi tiêu
+        ↓
+OUTPUT
+Hiển thị: "Đã chi 200.000đ"
+→ cập nhật báo cáo tháng
+
+3. Tính dung lượng lưu trữ
+Mỗi giao dịch chiếm 1 KB.
+Một ngày có 1.000.000 giao dịch:
+1.000.000×1KB=1.000.000KB
+Đổi sang MB:
+1.000.000÷1.000=1.000MB
+Vậy cần khoảng:
+1.000 MB = 1 GB dữ liệu/ngày theo cách tính thập phân.
+Đây là dung lượng dữ liệu thô, chưa tính database index, metadata, bản sao lưu, log và các dữ liệu phụ trợ khác.
+
+4. File cấu hình .env
+Các mã bí mật như API Key, API Secret, thông tin kết nối Database nên được lưu trong file:
+.env
+Ví dụ:
+API_KEY=your_api_key
+API_SECRET=your_secret
+DATABASE_URL=your_database_url
+File .env thường là file ẩn hoặc không được hiển thị tùy cách cấu hình hệ thống. Khi cần kiểm tra trên Windows, có thể bật:
+File Explorer → View → Show → Hidden items
+Ngoài ra, .env nên được thêm vào .gitignore để tránh đưa thông tin bí mật lên Git repository.
+.env
+Lưu ý: Ẩn file không đồng nghĩa với bảo mật tuyệt đối. Thông tin bí mật vẫn cần được quản lý đúng cách.
+
+Kết luận
+MoMo-Lite có thể biến dữ liệu giao dịch thành giá trị theo chuỗi:
+Data → Information → Knowledge → Wisdom
+Từ các giao dịch thô, hệ thống tạo báo cáo, phân tích thói quen chi tiêu, cảnh báo vượt ngân sách và cuối cùng đưa ra gợi ý tiết kiệm phù hợp cho người dùng. Với 1 triệu giao dịch/ngày, nếu mỗi giao dịch 1 KB thì dữ liệu thô cần khoảng 1 GB/ngày.
+
